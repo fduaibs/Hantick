@@ -13,6 +13,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
+import Chat from './components/dashboard/Chat';
 
 if(localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -27,9 +28,6 @@ if(localStorage.jwtToken) {
   }
 }
 
-
-
-
 class App extends Component {
   render() {
     return (
@@ -40,6 +38,8 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/chat" component={Chat}/>
+
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             </Switch>

@@ -1,13 +1,18 @@
 const { Router } = require('express');
 const UserController = require('./controllers/UserController');
+const LoginController = require('./controllers/LoginController');
 const TicketController = require('./controllers/TicketController');
+const SessionController = require('./controllers/SessionController');
+const MessageController = require('./controllers/MessageController');
+
 
 const routes = Router();
 
-//routes.get('/users', UserController.index);
-routes.post('/users', UserController.store);
+routes.post("/login", LoginController.store);
 
-//routes.get('/tickets', TicketController.index);
-//routes.post('/tickets', TicketController.store);
+routes.post("/register", UserController.store);
+
+routes.post("/chat/message", MessageController.store);
+routes.post("/chat/session", SessionController.store);
 
 module.exports = routes;
