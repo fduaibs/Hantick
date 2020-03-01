@@ -16,15 +16,13 @@ module.exports = {
     },
 
     async store(request, response) {
-        const { user_id, date, description } = request.body; //remover user_id e date dps
-        
-        //precisa filtrar user aqui?
+        const { user_id, subject, description } = request.body;
 
         const ticket = await Ticket.create({
-            user_id,
-            date,
+            user_id: user_id,
             status: 'Awaiting response',
-            description
+            subject: subject,   
+            description: description,
         })
     
         return response.json(ticket);

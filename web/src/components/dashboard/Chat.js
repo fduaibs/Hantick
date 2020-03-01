@@ -9,7 +9,7 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        this.props.getSession();
+        this.props.getSession(this.props.auth);
     }
 
     handleKeyPress = (event) => {
@@ -23,26 +23,90 @@ class Chat extends Component {
     }
 
     insertMessages = () => {
-        let pList = this.props.chatList.map((message, i) => { 
-            return (
-                React.createElement(
-                    'p',
-                    { 
-                        className: "col s12",
-                        key:[i], 
-                        style: {
-                            textAlign:"center",
-                            color: "white",
-                            backgroundColor: "blue",
-                            borderRadius: "10px"
-                        }    
-                    },
-                    message
+        let elementList = this.props.chatList.map((message, i) => {
+            if(this.props.whoSent[i] === 'bot') {
+                return ( 
+                    React.createElement(
+                        'div',
+                        { 
+                            className: "col s12",
+                            key:[i], 
+                            style: {
+                                borderRadius: "10px"
+                            }    
+                        },
+                        React.createElement('p', 
+                        {
+                            className: "col s5",
+                            style: {
+                                borderRadius: "10px",
+                                backgroundColor: "blue",
+                                textAlign:"center",
+                                color: "white",
+                            }           
+                        }, message)
+                    )
                 )
-            )
+            } else if (this.props.whoSent[i] === 'user') {
+                return ( 
+                    React.createElement(
+                        'div',
+                        { 
+                            className: "col s12",
+                            key:[i], 
+                            style: {
+                                borderRadius: "10px"
+                            }    
+                        },
+                        React.createElement('p', 
+                        {
+                            className: "col s5 offset-s7",
+                            style: {
+                                borderRadius: "10px",
+                                backgroundColor: "green",
+                                textAlign:"center",
+                                color: "white",
+                            }           
+                        }, message)
+                    )
+                )
+            } else {
+                let ticketList = [this.props.chatList[i]];
+                ticketList = ticketList.map((iterable) => {
+                    return (
+                        React.createElement('button', {
+                            className: '',
+                            key:[i],
+                            style: {
+                                backgroundColor: 'darkblue',
+                                height: '2rem',
+                                borderRadius: '50px',
+                                color: 'white',
+                            },
+                        }, iterable._id)
+                    )
+                })
+                return (
+                    React.createElement(
+                        'div',
+                        { 
+                            className: 'col s12',
+                            key:[i], 
+                            style: {
+                                borderRadius: '10px'
+                            }    
+                        }, React.createElement('div', {
+                            className: 'col s9',
+                            style: {
+                                borderRadius: '10px'
+                            } 
+                        }, ticketList)
+                    )
+                )
+            }
         })
         return (
-            React.createElement('div', {}, pList)
+            React.createElement('div', {}, elementList)
         )
     }
         
@@ -56,7 +120,7 @@ class Chat extends Component {
                 <div className="row">
                     <div id="chatArea" className="col s8 offset-s2" style={{ backgroundColor: "lightgrey", marginTop: "2rem", borderRadius: "15px" }} >
                         <div id="messageArea" className="col s12" style={{ overflow: "auto", height: "350px", backgroundColor: "white", marginTop: "2rem", borderRadius: "15px" }}>
-                            {this.insertMessages()}
+                        {this.insertMessages()}
                         </div>
                         <div className="input-field col s12" style={{backgroundColor: "white", borderRadius: "15px"}}>
                             <input 
@@ -84,10 +148,10 @@ Chat.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    console.log('StateForProps>', state.chat)
+    console.log('StateForProps>', state)
     return {
+        auth: state.auth,
         chat: {
-            isAuthenticated: state.chat.isAuthenticated,
             sessionLoading: state.chat.sessionLoading,
             messageLoading: state.chat.messageLoading,
         },
@@ -100,6 +164,7 @@ const mapStateToProps = (state) => {
         messageList: state.chat.messageList,
         inputList: state.chat.inputList,
         chatList: state.chat.chatList,
+        whoSent: state.chat.whoSent,
     }
 };
 

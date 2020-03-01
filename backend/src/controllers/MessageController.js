@@ -12,17 +12,18 @@ const assistantId = '8b1d1595-e3ee-4eee-b300-17b23bf414d2';
 
 module.exports = {
     async store(request, response) {
-        const { text, sessionId } = request.body;
+        const { input, sessionId, context } = request.body;
         let message;
 
         const params = {
-            assistantId,
-            sessionId,
-            input: { text },
+            assistantId: assistantId,
+            sessionId: sessionId,
+            input: input,
+            context: context,
         }
         assistant.message(params).then(res => {
-          response.json(res.result.output.generic);
-          message = res.result.output.generic[0].text;
+          response.json(res.result);
+          message = res.result;
         }).catch(err => {
             response.status(500).json(err);
         });
