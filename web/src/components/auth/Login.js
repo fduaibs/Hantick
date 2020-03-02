@@ -48,8 +48,8 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container">
-                <div style={{ marginTop: "4rem" }} className="row">
+            <div className="container" style={{ marginTop: "6rem" }}>
+                <div className="row">
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect">
                             <i className="material-icons left">keyboard_backspace</i> Back to home
@@ -58,8 +58,8 @@ class Login extends Component {
                             <h4>
                                 <b>Sign in</b> to continue to Hantick
                             </h4>
-                            <p className="grey-text text-darken-1">
-                                Don't have an account? <Link to="/register">Sign Up</Link>.
+                            <p className="grey-text text-darken-2">
+                                Don't have an account? <Link to="/register" style={{color: "green"}}>Sign Up</Link>.
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -74,7 +74,7 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound,
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" style={{color: "#616161"}}>Email</label>
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
@@ -91,7 +91,7 @@ class Login extends Component {
                                         invalid: errors.password || errors.passwordincorrect,
                                     })}
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password" style={{color: "#616161"}}>Password</label>
                                 <span className="red-text">
                                     {errors.password}
                                     {errors.passwordincorrect}
@@ -106,7 +106,7 @@ class Login extends Component {
                                         marginTop: "1rem"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="btn btn-large waves-effect waves-light hoverable light-green darken-2"
                                 >
                                     Login
                                 </button>

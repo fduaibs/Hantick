@@ -1,4 +1,10 @@
+html, body, #root {
+  height: 100%;
+  /* label color */
+}
+
 body {
+  background: #bdbdbd;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +16,38 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* .input-field label {
+  color: #689f38 !important;
+} */
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #689f38 !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #689f38 !important;
+  box-shadow: 0 1px 0 0 #689f38 !important;
+}
+
+.input-field input[type=email]:focus + label {
+  color: #689f38 !important;
+}
+
+/* label underline focus color */
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid #689f38 !important;
+  box-shadow: 0 1px 0 0 #689f38 !important;
+}
+.input-field input[type=password]:focus + label {
+  color: #689f38 !important;
+}
+
+/* label underline focus color */
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid #689f38 !important;
+  box-shadow: 0 1px 0 0 #689f38 !important;
 }

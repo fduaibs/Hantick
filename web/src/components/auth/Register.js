@@ -50,10 +50,10 @@ class Register extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container">
+            <div className="container" style={{marginTop: "5rem"}}>
                 <div className="row">
                     <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
+                        <Link to="/" className="btn-flat waves-effect waves-Light">
                             <i className="material-icons left">keyboard_backspace</i>
                             Back to home
                         </Link>
@@ -61,8 +61,8 @@ class Register extends Component {
                             <h4>
                                 <b>Sign up</b> it's free
                             </h4>
-                            <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login">Sign In</Link>.
+                            <p className="grey-text text-darken-2">
+                                Already have an account? <Link to="/login" style={{ color: "green" }}>Sign In</Link>.
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -77,7 +77,7 @@ class Register extends Component {
                                         invalid: errors.name
                                     })}
                                 />
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name" style={{color: "#616161"}}>Name</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
@@ -90,7 +90,7 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" style={{color: "#616161"}}>Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12">
@@ -103,7 +103,7 @@ class Register extends Component {
                                         invalid: errors.password
                                     })}
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password" style={{color: "#616161"}}>Password</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12">
@@ -116,20 +116,20 @@ class Register extends Component {
                                         invalid: errors.password2
                                     })}
                                 />
-                                <label htmlFor="password2">Confirm password</label>
+                                <label htmlFor="password2" style={{color: "#616161"}}>Confirm password</label>
                                 <span className="red-text">{errors.password2}</span>
 
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                 <button
                                     style={{
-                                        width: "150px",
+                                        width: "col s2",
                                         borderRadius: "3px",
                                         letterSpacing: "1.5px",
-                                        marginTop: "1rem"
+                                        //marginTop: "5px"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="btn btn-large waves-effect waves-light hoverable light-green darken-2"
                                 >
                                     Sign Up
                                 </button>

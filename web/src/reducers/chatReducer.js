@@ -1,13 +1,9 @@
-import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE } from '../actions/types';
+import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE, RESET_PROPS } from '../actions/types';
 
 const initialState = {
-    sessionLoading: true,
     sessionId: null,
+    sessionLoading: true,
     messageLoading: true,
-    message: {
-        text: null,
-        type: null,
-    },
     messageList: [],
     inputList: [],
     chatList: [],
@@ -21,9 +17,7 @@ export default (state = initialState, action) => {
             return { 
                 ...state, 
                 sessionId: action.payload.session_id,
-                message: action.payload.response.text,
                 queueIndex: state.responseQueue.length+1,
-                type: action.payload.response.response_type,
                 sessionLoading: false,
                 messageList: [...state.messageList, action.payload.response.text],
                 chatList: [...state.chatList, action.payload.response.text],
@@ -43,8 +37,6 @@ export default (state = initialState, action) => {
 
             return { 
                 ...state, 
-                message: action.payload.response.output.generic.text,
-                type: action.payload.response.output.generic.response_type,
                 messageLoading: false,
                 messageList: [...state.messageList, delayedResponses],
                 chatList: chatListPrev.concat(delayedResponses, chatListAfter),
@@ -53,8 +45,6 @@ export default (state = initialState, action) => {
         case USER_INPUT: {
             return {
                 ...state,
-                message: action.payload.response.text,
-                type: action.payload.response.response_type,
                 messageLoading: true,
                 inputList: [...state.inputList, action.payload.input],
                 chatList: state.chatList.concat(action.payload.input, action.payload.response.text),
@@ -68,8 +58,6 @@ export default (state = initialState, action) => {
             state.chatList[whereToPut] = 'Waiting DB...';
             return {
                 ...state,
-                message: 'Waiting BD...',
-                type: 'waiting_bd',
                 chatList: state.chatList,
             }
         }
@@ -80,7 +68,7 @@ export default (state = initialState, action) => {
             const chatListAfter = state.chatList.slice(sliceIn+1, state.chatList.length);
             const whoSentAfter = state.whoSent.slice(sliceIn+1, state.whoSent.length);
 
-            const delayedWhoSent = action.payload.response.tickets.map(() => {return ('bd')});
+            //const delayedWhoSent = action.payload.response.tickets.map(() => {return ('bd')});
 
             // const responseQueuePrev = state.responseQueue.slice(0, action.payload.queueIndex+1);
             // let responseQueueAfter = state.responseQueue.slice(action.payload.queueIndex+1, state.responseQueue.length);
@@ -90,8 +78,9 @@ export default (state = initialState, action) => {
 
             return {
                 ...state,
-                chatList: chatListPrev.concat(action.payload.response.tickets, chatListAfter),
-                whoSent: whoSentPrev.concat(delayedWhoSent, whoSentAfter),
+                //chatList: chatListPrev.concat(action.payload.response.tickets, chatListAfter),
+                chatList: chatListPrev.concat([action.payload.response.tickets], chatListAfter),
+                whoSent: whoSentPrev.concat('bd', whoSentAfter),
                 // responseQueue: newResponseQueue,
                 // queueIndex: state.queueIndex+1,
             }
@@ -118,6 +107,9 @@ export default (state = initialState, action) => {
                 // responseQueue: newResponseQueue,
                 // queueIndex: state.queueIndex+1,
             }
+        }
+        case RESET_PROPS: {
+            return initialState;
         }
         default:
             return state;

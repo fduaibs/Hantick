@@ -21,8 +21,8 @@ class Landing extends Component {
                         <h4>
                             Your ticket-handler <b>chatbot</b>
                         </h4>
-                        <div className="divider"></div>
-                        <br/>
+                        <div className="divider"/>
+                        <p/>
                         <div className="col s6">
                             <Link to="/register" style={{  
                                 width: "140px",

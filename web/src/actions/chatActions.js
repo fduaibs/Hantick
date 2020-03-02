@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE } from './types';
-
-const assistantId = '8b1d1595-e3ee-4eee-b300-17b23bf414d2';
+import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE, RESET_PROPS } from './types';
 
 export const getSession = (auth) => dispatch => {
     axios.post('/chat/sessions', {}).then(res => {
@@ -10,7 +8,6 @@ export const getSession = (auth) => dispatch => {
         const userName = auth.user.name.split(" ");
 
         axios.post("/chat/messages", { 
-            assistantId: assistantId, 
             sessionId: sessionId, 
             input: {
                 text: "",
@@ -47,7 +44,6 @@ export const composeGetSession = (session, response) => {
 export const sendMessage = (message, sessionId, queueIndex) => dispatch => {
     dispatch(composeUserInput(message));
     axios.post("/chat/messages", { 
-        assistantId: assistantId, 
         sessionId: sessionId, 
         input: {
             text: message,
@@ -69,7 +65,6 @@ export const sendMessage = (message, sessionId, queueIndex) => dispatch => {
                     }).then(res => {
                         dispatch(afterTickets(res.data, queueIndex))
                         axios.post('/chat/messages', {
-                            assistantId: assistantId,
                             sessionId: sessionId,
                             input: {
                                 text: 'Done.',
@@ -95,7 +90,6 @@ export const sendMessage = (message, sessionId, queueIndex) => dispatch => {
                     }).then(res => {
                         console.log("save ticket res", res)
                         axios.post('/chat/messages', {
-                            assistantId: assistantId,
                             sessionId: sessionId,
                             input: {
                                 text: 'Done.',
@@ -182,5 +176,11 @@ export const afterDoneCreate = (responseMessage, queueIndex) => {
             response: responseMessage,
             queueIndex: queueIndex,
         }
+    }
+}
+
+export const resetProps = () => {
+    return {
+        type: RESET_PROPS,
     }
 }

@@ -7,4 +7,5 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const BEFORE_TICKETS = 'BEFORE_TICKETS';
 export const AFTER_TICKETS = 'AFTER_TICKETS';
 export const AFTER_DONE = 'AFTER_DONE';
-export const AFTER_DONE_CREATE = 'AFTER_DONE_CREATE'
+export const AFTER_DONE_CREATE = 'AFTER_DONE_CREATE';
+export const RESET_PROPS = 'RESET_PROPS';
