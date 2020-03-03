@@ -3,9 +3,10 @@
 
 ### This project is still in development.
 
-#### Made with: Node.js, MongoDB, Express, React, Redux, Axios, IBM Watson Assistant and more.
+#### Made with: Node.js, MongoDB, Express, React, Redux, Axios, MaterializeCSS, IBM Watson Assistant and more.
 
 #### 1 - How to run
+
 1.1 - cd /Hantick/backend && npm/yarn start;
 
 1.2 - cd /Hantick/web && npm/yarn start;
@@ -15,23 +16,28 @@
 #### 2 - Screenshots
 
 ##### 1 - Chat view
-![Chat](https://i.imgur.com/yQf5BH0l.png)
+![Chat](https://i.imgur.com/w6Iyz40.png)
 
 ##### 2 - Dashboard view
-![Chat](https://i.imgur.com/ow9n9Upl.png)
+![Dashboard](https://i.imgur.com/MoFdWVv.png)
 
-##### 3 - Login view
-![Chat](https://i.imgur.com/9Y2wW1Wl.png)
+##### 3 - Sign-In view
+![Sign-In](https://i.imgur.com/2WlvcBR.png)
 
-##### 1 - Register view
-![Chat](https://i.imgur.com/cp4heHsl.png)
+##### 4 - Sign-Up view
+![Sign-Up](https://i.imgur.com/K660J4M.png)
+
+##### 5 - Landing view
+![Landing](https://i.imgur.com/OXIcFEg.png)
 
 #### 3 - Features
 
 #### 4 - To do
 
-- [ ] Review the code (remove anotations, rename some files and change directories);
-- [ ] Chat autoscroll and input history;
+- [x] Review the code (remove anotations, rename some files and change directories);
+- [x] Chat autoscroll;
+- [x] Change bot response when user doesnt have tickets and request a search;
+- [ ] Chat input history;
 - [ ] Chat message baloons;
 - [ ] Chat animations (like message loading);
 - [ ] Session timeout error (5 minutes after the last message was sent);
@@ -39,7 +45,7 @@
 - [ ] APIs errors (request/response timeouts during the conversation);
 - [ ] Toggle show password button;
 - [ ] Login and register "I'm not a robot" thing;
-- [ ] A better dashboard and profile editing pages;
+- [ ] A better dashboard and a profile editing page;
 - [ ] Change language;
 - [ ] Better logos;
 - [ ] Voice integration;
