@@ -12,26 +12,26 @@ class Dashboard extends Component {
     render() {
         const { user } = this.props.auth;
         return (
-            <div className="container">
-                <div style={{ height: "100vh" }} className="valign-wrapper">
-                    <div className="row">
+            <div className="container valign-wrapper" style={{ marginTop: "15rem" }}>
+                <div className="row">
+                    <div className="col s12" style={{ textAlign: "center" }}>
                         <div className="col s12">
                             <h4>
                                 <b> Hey there,</b> {user.name.split(" ")[0]}!
                             </h4>
-                            <div className="divider grey"></div>
+                            <div className="divider grey"/>
                             <Link to="/chat" style={{  
                                     borderRadius: "10px",
                                     letterSpacing: "1.5px",
                                     marginTop: '1rem'
                                 }}
-                                className="col s10 offset-s1 btn-large waves-effect waves-light hoverable light-green darken-2">
+                                className="btn-large waves-effect waves-light hoverable light-green darken-2">
                                     Talk with Hantick
                             </Link>
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         );
     }
 }

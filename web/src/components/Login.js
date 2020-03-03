@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
+import { loginUser } from '../actions/authActions';
 import classnames from "classnames";
 
 class Login extends Component {
@@ -48,18 +48,18 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container" style={{ marginTop: "6rem" }}>
+            <div className="container valign-wrapper" style={{ marginTop:"7rem" }}>
                 <div className="row">
-                    <div className="col s8 offset-s2">
+                    <div className="col 10 offset-s1">
                         <Link to="/" className="btn-flat waves-effect">
                             <i className="material-icons left">keyboard_backspace</i> Back to home
                         </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                        <div className="col s12">
                             <h4>
                                 <b>Sign in</b> to continue to Hantick
                             </h4>
                             <p className="grey-text text-darken-2">
-                                Don't have an account? <Link to="/register" style={{color: "green"}}>Sign Up</Link>.
+                                Don't have an account? <Link to="/register" style={{ color: "green" }}>Sign Up</Link>.
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -74,7 +74,7 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound,
                                     })}
                                 />
-                                <label htmlFor="email" style={{color: "#616161"}}>Email</label>
+                                <label htmlFor="email" style={{ color: "#616161" }}>Email</label>
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
@@ -91,24 +91,22 @@ class Login extends Component {
                                         invalid: errors.password || errors.passwordincorrect,
                                     })}
                                 />
-                                <label htmlFor="password" style={{color: "#616161"}}>Password</label>
+                                <label htmlFor="password" style={{ color: "#616161" }}>Password</label>
                                 <span className="red-text">
                                     {errors.password}
                                     {errors.passwordincorrect}
                                 </span>
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12">
                                 <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
-                                    }}
-                                    type="submit"
                                     className="btn btn-large waves-effect waves-light hoverable light-green darken-2"
-                                >
-                                    Login
+                                    style={{
+                                        marginTop: "1rem",
+                                        borderRadius: "10px",
+                                        letterSpacing: "1.5px",
+                                    }}
+                                    type="submit">
+                                    Sign In
                                 </button>
                             </div>
                         </form>

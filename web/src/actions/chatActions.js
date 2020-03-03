@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE, RESET_PROPS } from './types';
+import { GET_SESSION, 
+    SEND_MESSAGE, 
+    USER_INPUT, 
+    BEFORE_TICKETS, 
+    AFTER_TICKETS, 
+    AFTER_DONE, 
+    AFTER_DONE_CREATE, 
+    RESET_PROPS 
+} from './types';
 
 export const getSession = (auth) => dispatch => {
     axios.post('/chat/sessions', {}).then(res => {

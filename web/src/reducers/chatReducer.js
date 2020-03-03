@@ -1,4 +1,13 @@
-import { GET_SESSION, SEND_MESSAGE, USER_INPUT, BEFORE_TICKETS, AFTER_TICKETS, AFTER_DONE, AFTER_DONE_CREATE, RESET_PROPS } from '../actions/types';
+import { 
+    GET_SESSION, 
+    SEND_MESSAGE, 
+    USER_INPUT, 
+    BEFORE_TICKETS, 
+    AFTER_TICKETS, 
+    AFTER_DONE, 
+    AFTER_DONE_CREATE, 
+    RESET_PROPS 
+} from '../actions/types';
 
 const initialState = {
     sessionId: null,
@@ -67,23 +76,23 @@ export default (state = initialState, action) => {
             const whoSentPrev = state.whoSent.slice(0, sliceIn);
             const chatListAfter = state.chatList.slice(sliceIn+1, state.chatList.length);
             const whoSentAfter = state.whoSent.slice(sliceIn+1, state.whoSent.length);
-
-            //const delayedWhoSent = action.payload.response.tickets.map(() => {return ('bd')});
-
-            // const responseQueuePrev = state.responseQueue.slice(0, action.payload.queueIndex+1);
-            // let responseQueueAfter = state.responseQueue.slice(action.payload.queueIndex+1, state.responseQueue.length);
+            let returnObj = {};
             
-            // responseQueueAfter = responseQueueAfter.map((x) => {return(x+1)})
-            // const newResponseQueue = responseQueuePrev.concat(state.responseQueue[action.payload.queueIndex]+1, responseQueueAfter);
-
-            return {
-                ...state,
-                //chatList: chatListPrev.concat(action.payload.response.tickets, chatListAfter),
-                chatList: chatListPrev.concat([action.payload.response.tickets], chatListAfter),
-                whoSent: whoSentPrev.concat('bd', whoSentAfter),
-                // responseQueue: newResponseQueue,
-                // queueIndex: state.queueIndex+1,
+            if(action.payload.response.tickets.length === 0) {
+                returnObj = {
+                    ...state,
+                    chatList: chatListPrev.concat( "You don't have any tickets to show.", chatListAfter),
+                    whoSent: whoSentPrev.concat('bot', whoSentAfter),
+                }
+            } else {
+                returnObj = {
+                    ...state,
+                    chatList: chatListPrev.concat([action.payload.response.tickets], chatListAfter),
+                    whoSent: whoSentPrev.concat('bd', whoSentAfter),
+                }
             }
+
+            return returnObj;
             
         }
         case AFTER_DONE: { 
@@ -104,8 +113,6 @@ export default (state = initialState, action) => {
                 ...state,
                 chatList: chatListPrev.concat(action.payload.response.output.generic[0].text, chatListAfter),
                 whoSent: whoSentPrev.concat('bot', whoSentAfter),
-                // responseQueue: newResponseQueue,
-                // queueIndex: state.queueIndex+1,
             }
         }
         case RESET_PROPS: {

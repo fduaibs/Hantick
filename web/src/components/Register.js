@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
+import { registerUser } from '../actions/authActions';
 import classnames from 'classnames';
 
 class Register extends Component {
@@ -50,14 +50,14 @@ class Register extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container" style={{marginTop: "5rem"}}>
+            <div className="container valign-wrapper" style={{ marginTop: "7rem" }}>
                 <div className="row">
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect waves-Light">
                             <i className="material-icons left">keyboard_backspace</i>
                             Back to home
                         </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                        <div className="col s12">
                             <h4>
                                 <b>Sign up</b> it's free
                             </h4>
@@ -77,7 +77,7 @@ class Register extends Component {
                                         invalid: errors.name
                                     })}
                                 />
-                                <label htmlFor="name" style={{color: "#616161"}}>Name</label>
+                                <label htmlFor="name" style={{ color: "#616161" }}>Name</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
@@ -90,7 +90,7 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
-                                <label htmlFor="email" style={{color: "#616161"}}>Email</label>
+                                <label htmlFor="email" style={{ color: "#616161" }}>Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12">
@@ -103,7 +103,7 @@ class Register extends Component {
                                         invalid: errors.password
                                     })}
                                 />
-                                <label htmlFor="password" style={{color: "#616161"}}>Password</label>
+                                <label htmlFor="password" style={{ color: "#616161" }}>Password</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12">
@@ -116,21 +116,19 @@ class Register extends Component {
                                         invalid: errors.password2
                                     })}
                                 />
-                                <label htmlFor="password2" style={{color: "#616161"}}>Confirm password</label>
+                                <label htmlFor="password2" style={{ color: "#616161" }}>Confirm password</label>
                                 <span className="red-text">{errors.password2}</span>
 
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12">
                                 <button
-                                    style={{
-                                        width: "col s2",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        //marginTop: "5px"
-                                    }}
                                     type="submit"
                                     className="btn btn-large waves-effect waves-light hoverable light-green darken-2"
-                                >
+                                    style={{
+                                        marginTop: "1rem",
+                                        borderRadius: "10px",
+                                        letterSpacing: "1.5px",
+                                    }}>
                                     Sign Up
                                 </button>
                             </div>

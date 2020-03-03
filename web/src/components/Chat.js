@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import { getSession, sendMessage, sendUserInput, resetProps } from '../../actions/chatActions';
+import { getSession, sendMessage, sendUserInput, resetProps } from '../actions/chatActions';
 
 class Chat extends Component {
     constructor(props) {
         super(props);
         this.inputRef = React.createRef();
+        this.lastChatDivRef = React.createRef();
     }
 
     componentDidMount() {
@@ -14,9 +15,15 @@ class Chat extends Component {
         this.props.getSession(this.props.auth);
     }
 
+    componentDidUpdate() {
+        this.autoScroll()
+    }
+
     reloadChat = () => {
-        this.inputRef.current.value = '';
-        this.inputRef.current.focus();
+        if(this.inputRef.current) {
+            this.inputRef.current.value = '';
+            //this.inputRef.current.focus();
+        }
         this.props.resetProps();
         this.props.getSession(this.props.auth);
     }
@@ -35,11 +42,11 @@ class Chat extends Component {
                 return ( 
                     React.createElement('div', { 
                         className: "col s12",
-                        key:[i+600],   
+                        key:[i],   
                     }, React.createElement('div',
                     { 
                         className: "col s8",
-                        key:[i+500], 
+                        key:[i], 
                         style: {
                             textAlign: "left"
                         }    
@@ -59,11 +66,11 @@ class Chat extends Component {
                 return ( 
                     React.createElement('div', { 
                             className: "col s12",
-                            key:[i+400],   
+                            key:[i],   
                         }, React.createElement('div',
                         { 
                             className: "col s8 offset-s4",
-                            key:[i+300], 
+                            key:[i], 
                             style: {
                                 textAlign: "right"
                             }    
@@ -85,7 +92,7 @@ class Chat extends Component {
                     return (
                         React.createElement('button', {
                             className: "grey darken-4 btn-small waves-effect waves-light hoverable",
-                            key:[i+200],
+                            key:[i],
                             style: {
                                 display:"inline-block",
                                 padding: "10px",
@@ -108,58 +115,55 @@ class Chat extends Component {
             }
         })
         return (
-            React.createElement('div', {}, elementList)
+            React.createElement('div', {}, [elementList, React.createElement('div', { className: 'col s12', ref: this.lastChatDivRef })])
         )
     }
         
     handleClick = () => {
         this.props.sendMessage(this.inputRef.current.value, this.props.sessionId, this.props.message.queueIndex);
-        this.inputRef.current.value = '';
-        this.inputRef.current.focus();
+        if(this.inputRef.current) {
+            this.inputRef.current.value = '';
+            //this.inputRef.current.focus();
+        }
     }    
 
     autoScroll = () => {
-        if(this.divRef) {
+        if(this.lastChatDivRef.current) {
+            this.lastChatDivRef.current.scrollIntoView({ behavior: "smooth" })
         }
     }
 
     render() {
         return(
-            <div className="container">
-                {/* <div style={{ height: "100vh" }} className="valign-wrapper"> */}
-                    <div className="row">
-                        <div className="s12" style={{ textAlign: "center" }}>
-                            <div id="chatArea" className="col s8 offset-s2 grey darken-4" style={{ marginTop: "7rem", borderRadius: "15px" }} >
-                                <div id="messageArea" className="col s12" style={{ overflow: "auto", height: "350px", backgroundColor: "white", marginTop: "2rem", borderRadius: "15px"}}>
-                                    {this.insertMessages()}
-                                    <div ref={this.divRef}/>
-                                    {this.autoScroll()}
-                                </div>
-                                <div className="input-field col s9" style={{backgroundColor: "white", borderRadius: "15px"}}>
-                                    <input
-                                        ref={this.inputRef}
-                                        className="col s12 materialize-textarea"
-                                        autoFocus={true}
-                                         placeholder="Say something..." 
-                                        type="text" 
-                                        onKeyDown ={this.handleKeyPress}
-                                        style={{ label: { color: "red" } }}
-                                    /> 
-                                </div>
-                                <div className="col s3">
-                                    <button type="submit" className="col s10 offset-s1 btn-flat btn-large waves-effect waves-light  light-green darken-2" onClick={this.handleClick} style={{marginTop: "14px", borderRadius: "15%"}}>
-                                            <i className="material-icons" style={{ color: "white" }}>send</i>
-                                    </button>
-                                </div>
+            <div className="container" style={{ marginTop: "7rem" }}>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="col s10 offset-s1 grey darken-4" style={{ borderRadius: "15px", height: "32rem" }} >
+                            <div className="col s12 white" style={{ height: "24rem", overflow: "auto", marginTop: "2rem", borderRadius: "15px" }}>
+                                {this.insertMessages()}
                             </div>
-                            <div className="col s1" style={{textAlign:'left', marginTop:'8rem'}}>
-                                <button type="submit" className="btn-floating btn-small waves-effect waves-light  light-green darken-2" onClick={this.reloadChat}>
-                                    <i className="material-icons" style={{ color: "white" }}>replay</i>
+                            <div className="col s10 input-field white" style={{ borderRadius: "15px" }}>
+                                <input
+                                    ref={this.inputRef}
+                                    autoFocus={true}
+                                        placeholder="Say something..." 
+                                    type="text" 
+                                    onKeyDown ={this.handleKeyPress}
+                                /> 
+                            </div>
+                            <div className="col s2">
+                                <button className="col s11 offset-s1 btn-flat btn-large waves-effect waves-light light-green darken-2" onClick={this.handleClick} style={{ marginTop: "1rem", borderRadius: "15px" }}>
+                                        <i className="material-icons white-text">send</i>
                                 </button>
                             </div>
                         </div>
+                        <div className="col s1" style={{ marginTop: "1rem" }}>
+                            <button className="btn-floating btn-small waves-effect waves-light light-green darken-2" onClick={this.reloadChat}>
+                                <i className="material-icons white-text">replay</i>
+                            </button>
+                        </div>
                     </div>
-                {/* </div> */}
+                </div>
             </div>
         )
     }
@@ -172,7 +176,7 @@ Chat.propTypes = {
     resetProps: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     chat: PropTypes.object.isRequired,
-    sessionId: PropTypes.string.isRequired,
+    sessionId: PropTypes.string,
     message: PropTypes.object.isRequired,
     messageList: PropTypes.array.isRequired,
     inputList: PropTypes.array.isRequired,
