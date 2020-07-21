@@ -5,14 +5,6 @@
 
 #### Made with: Node.js, MongoDB, Express, React, Redux, Axios, MaterializeCSS, IBM Watson Assistant and more.
 
-#### 1 - How to run
-
-1.1 - cd /Hantick/backend && npm/yarn start;
-
-1.2 - cd /Hantick/web && npm/yarn start;
-
-1.3 - Ports 3333 and 3000 need to be fowarded (or you can change them).
-
 #### 2 - Screenshots
 
 ##### 1 - Chat view
